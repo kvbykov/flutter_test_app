@@ -10,8 +10,9 @@ class Username extends FormzInput<String, UsernameValidationError> {
   @override
   UsernameValidationError? validator(String value) {
     if (value.isEmpty) return UsernameValidationError.empty;
-    if (!containsOnlyLetters(value))
+    if (!containsOnlyLetters(value)) {
       return UsernameValidationError.invalidSymbols;
+    }
 
     return null;
   }

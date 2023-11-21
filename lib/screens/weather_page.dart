@@ -88,7 +88,8 @@ class WeatherStatusWidget extends StatelessWidget {
     return BlocBuilder<WeatherBloc, WeatherState>(
       builder: (conetxt, state) {
         if (state.isInitial) return const Text('click "search" button');
-        if (state.isInProgress) return const CircularProgressIndicator();
+        // was added to explicity show state updates every N seconds when a new request is sent to a weather API
+        // if (state.isInProgress) return const CircularProgressIndicator();
         if (state.isFailure) {
           return const Padding(
             padding: EdgeInsets.all(20),

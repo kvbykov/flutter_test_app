@@ -39,9 +39,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       status: WeatherStatus.success,
       weather: weather,
     ));
-    _timer?.cancel();
-    _timer = Timer.periodic(
-        const Duration(seconds: 3), (_) => add(_WeatherAutoUpdated()));
+    _setUpdateTimer();
   }
 
   Future<void> _loadWeather(Emitter<WeatherState> emit) async {
@@ -60,6 +58,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       status: WeatherStatus.success,
       weather: weather,
     ));
+  }
+
+  /// Cancels the old timer if it exists, sets a new one to fetch weather data every 60 seconds
+  void _setUpdateTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(
+        const Duration(seconds: 60), (_) => add(_WeatherAutoUpdated()));
   }
 
   Future<void> _onAutoUpdated(

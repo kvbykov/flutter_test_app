@@ -224,7 +224,7 @@ class SubmitButton extends StatelessWidget {
             ? const SizedBox(
                 height: 15,
                 width: 15,
-                child: const CircularProgressIndicator(),
+                child: CircularProgressIndicator(),
               )
             : state.status.isSuccess
                 ? const Icon(Icons.done)

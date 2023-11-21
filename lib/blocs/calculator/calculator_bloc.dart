@@ -57,7 +57,8 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     OperationPressed event,
     Emitter<CalculatorState> emit,
   ) {
-    if (state.second == 0) {
+    // Chained operations are not supported, so it just returns null if state.second and state.operation have already been set
+    if (state.second == 0 && state.operation == Operation.none) {
       final Operation operation;
       switch (event.operation) {
         case '+':
@@ -75,7 +76,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
           break;
 
         // just because Dart can't tell if switch-case is exhaustive
-        //
+        // TODO: change Event.operation type to Operation
         default:
           operation = Operation.plus;
       }
@@ -96,7 +97,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     if (operation == Operation.none) {
       return;
     } else {
-      num result = 777777777777;
+      num result = 0;
       switch (operation) {
         case Operation.plus:
           result = state.first + state.second;

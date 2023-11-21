@@ -19,6 +19,7 @@ extension OperationX on Operation {
   }
 }
 
+// TODO: initial .first and .second values should not be zeros
 final class CalculatorState extends Equatable {
   final num first;
   final num second;
